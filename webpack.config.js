@@ -8,7 +8,7 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 const mock = require('./mock')
 
 module.exports = ({env} = {}) => {
-  const prod = env === 'prod' || env === 'share'
+  const prod = env === 'prod' || env === 'github'
 
   const cssLoader = {
     loader: 'css-loader',
@@ -45,7 +45,7 @@ module.exports = ({env} = {}) => {
       path: path.resolve('dist'),
       filename: '[name].[contenthash:8].js',
       chunkFilename: '[name].[contenthash:8].js',
-      publicPath: '/'
+      publicPath: env === 'github' ? '/lottery' : '/'
     },
 
     resolve: {
@@ -149,7 +149,7 @@ module.exports = ({env} = {}) => {
   }
 
   // 线上环境
-  if (env === 'prod' || env === 'test' || env === 'pre' || env === 'demo' || env === 'share') {
+  if (env === 'prod' || env === 'github') {
     Object.assign(config.optimization, {
       minimize: true,
       minimizer: [

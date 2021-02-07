@@ -6,9 +6,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import './style.less'
 import routes from './route'
-import {createPromise, delay} from './util'
 
-const Router = ENV === 'prod' ? BrowserRouter : hot(BrowserRouter)
+const Router = ENV === 'prod' || ENV === 'github' ? BrowserRouter : hot(BrowserRouter)
 
 // 统一表单错误提示
 const validateMessages = {
@@ -16,7 +15,7 @@ const validateMessages = {
 }
 
 ReactDOM.render(
-  <ConfigProvider locale={zhCN} form={{validateMessages}}><Router><Switch>
+  <ConfigProvider locale={zhCN} form={{validateMessages}}><Router basename={`${ENV === 'github' ? '/lottery' : '/'}`}><Switch>
     <Route path="*" component={Main}></Route>
   </Switch></Router></ConfigProvider>,
   document.querySelector('.layout')
@@ -48,7 +47,7 @@ function flat(routes: IRoute[]) {
 }
 
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('sw.js', {scope: '/'}).then(registration => {
+  navigator.serviceWorker.register('sw.js', {scope: ENV === 'github' ? '/lottery/' : '/'}).then(registration => {
     registration.addEventListener('updatefound', () => {
       const {installing} = registration
       installing.onstatechange = async () => {
@@ -63,6 +62,6 @@ if (navigator.serviceWorker) {
 if (!navigator.userAgent.toLowerCase().includes('mac')) {
   const link = document.createElement('link')
   link.rel = 'stylesheet'
-  link.href = '/static/css/scrollbar.css'
+  link.href = `${ENV === 'github' ? '/lottery' : ''}/static/css/scrollbar.css`
   document.head.appendChild(link)
 }

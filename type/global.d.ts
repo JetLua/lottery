@@ -1,6 +1,6 @@
 declare module '*.less'
 
-declare const ENV: 'prod' | 'dev'
+declare const ENV: 'prod' | 'github'
 
 interface Window {
   r: number

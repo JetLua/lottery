@@ -11,7 +11,7 @@ export default async function() {
 
   if (data) {
     for (const item of data) {
-      loader.add(item.id, `/static/avatar/${item.id}.png`)
+      loader.add(item.id, `${ENV === 'github' ? '/lottery' : ''}/static/avatar/${item.id}.png`)
     }
   }
 
