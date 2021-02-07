@@ -19,6 +19,7 @@ export default React.memo(function() {
   useMount(async () => {
     const {preload, init, lottery, congratulate, normal, go} = await import('./game')
     message.loading({content: '加载资源', duration: 0, key: 1})
+    console.log('load')
     await preload()
     init()
     immut.current.go = go

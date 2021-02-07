@@ -6,6 +6,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 
 import './style.less'
 import routes from './route'
+import {createPromise, delay} from './util'
 
 const Router = ENV === 'prod' ? BrowserRouter : hot(BrowserRouter)
 
@@ -47,11 +48,18 @@ function flat(routes: IRoute[]) {
 }
 
 if (navigator.serviceWorker) {
-  navigator.serviceWorker.register('sw.js', {
-    scope: '/'
+  navigator.serviceWorker.register('sw.js', {scope: '/'}).then(registration => {
+    registration.addEventListener('updatefound', () => {
+      const {installing} = registration
+      installing.onstatechange = async () => {
+        // 只能刷新
+        registration.active?.state === 'activated' && location.reload()
+      }
+    })
   })
 }
 
+// 给个类似Mac的滚动条
 if (!navigator.userAgent.toLowerCase().includes('mac')) {
   const link = document.createElement('link')
   link.rel = 'stylesheet'
