@@ -1,0 +1,70 @@
+.root {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+.award {
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+}
+
+.btn-group {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  :global {
+    .ant-btn {
+      margin-left: 8px;
+      min-width: 6rem;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.modal {
+  max-height: 80%;
+  overflow: auto;
+}
+
+.form {
+  :global {
+    .ant-form-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .ant-divider:first-child {
+      margin-top: 0;
+    }
+  }
+}
+
+.record {
+  .list {
+    & > div {
+      font-size: 16px;
+      width: 20%;
+      float: left;
+      line-height: 3;
+      text-align: center;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+
+  :global {
+    .ant-divider:first-child {
+      margin-top: 0;
+    }
+  }
+}

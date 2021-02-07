@@ -1,0 +1,13 @@
+{
+  "name": "lottery",
+  "short_name": "lottery",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#fff",
+  "start_url": "/",
+  "icons": [{
+    "src": "static/logo.svg",
+    "sizes": "any",
+    "type": "image/svg"
+  }]
+}
